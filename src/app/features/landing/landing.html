@@ -1,0 +1,19 @@
+<app-hero-section />
+
+@defer (on viewport) {
+  <app-features-section />
+} @placeholder {
+  <div class="py-24" aria-hidden="true"></div>
+}
+
+@defer (on viewport) {
+  <app-live-now-section />
+} @placeholder {
+  <div class="py-12" aria-hidden="true"></div>
+}
+
+@defer (on viewport) {
+  <app-cta-section />
+} @placeholder {
+  <div class="py-24" aria-hidden="true"></div>
+}

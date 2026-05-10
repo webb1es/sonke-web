@@ -1,0 +1,22 @@
+<div class="space-y-6">
+  <header>
+    <p class="text-sm font-medium text-brand-700">Dashboard</p>
+    <h1 class="mt-1 font-display text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl">
+      Welcome back, {{ firstName() }}.
+    </h1>
+    <p class="mt-1 text-sm text-zinc-600">Here's what's happening across the federation today.</p>
+  </header>
+
+  @if (liveBanner(); as banner) {
+    <div class="flex items-center gap-3 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm">
+      <span class="inline-flex h-2 w-2 animate-pulse rounded-full bg-red-500"></span>
+      <p class="font-medium text-red-800">{{ banner }}</p>
+    </div>
+  }
+
+  <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+    <div class="lg:col-span-2"><app-upcoming-fixtures /></div>
+    <div><app-latest-scores /></div>
+    <div class="lg:col-span-3"><app-news-feed /></div>
+  </div>
+</div>
