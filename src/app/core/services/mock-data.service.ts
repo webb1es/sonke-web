@@ -1,5 +1,5 @@
 import { Injectable, computed, signal } from '@angular/core';
-import { Competition, Match, Member, NewsItem, Team } from '../models';
+import { Competition, Match, NewsItem, Team } from '../models';
 
 const teams = {
   hig: { id: 'hig', name: 'Highlanders FC', shortName: 'HIG', primaryColor: '#000000' },
@@ -54,8 +54,6 @@ const news: ReadonlyArray<NewsItem> = [
   { id: 'n-5', slug: 'mobile-money-payouts', title: 'Mobile-money payouts go live for federations', excerpt: 'EcoCash, M-Pesa and MoMo payouts are now available for ticket sales, sponsorship and ad revenue.', publishedAt: '2026-05-07T07:45:00Z', category: 'Commerce', author: 'Platform Team' },
 ];
 
-const currentMember: Member = { id: 'me', fullName: 'Tafadzwa Chirinda', roles: ['fan'], email: 'tafadzwa@example.com' };
-
 @Injectable({ providedIn: 'root' })
 export class MockDataService {
   readonly competitions = signal<ReadonlyArray<Competition>>(competitions);
@@ -63,6 +61,5 @@ export class MockDataService {
   readonly liveNow = signal<ReadonlyArray<Match>>(liveNow);
   readonly latestScores = signal<ReadonlyArray<Match>>(latestScores);
   readonly news = signal<ReadonlyArray<NewsItem>>(news);
-  readonly currentMember = signal<Member>(currentMember);
   readonly liveCount = computed(() => this.liveNow().length);
 }

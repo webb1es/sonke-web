@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "https://api-test.sonkesports.com",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": { "^/api": "" }
+  }
+}

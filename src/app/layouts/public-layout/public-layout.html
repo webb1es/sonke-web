@@ -13,12 +13,18 @@
       </nav>
 
       <div class="flex items-center gap-2">
-        <a routerLink="/dashboard" class="hidden rounded-md px-3 py-2 text-sm font-medium text-zinc-700 hover:text-zinc-900 md:block">
-          Sign in
-        </a>
-        <a routerLink="/dashboard" class="inline-flex items-center rounded-md bg-brand-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-brand-700">
-          Get started
-        </a>
+        @if (isAuthenticated()) {
+          <a routerLink="/dashboard" class="inline-flex items-center rounded-md bg-brand-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-brand-700">
+            Open dashboard
+          </a>
+        } @else {
+          <button type="button" (click)="login()" class="hidden rounded-md px-3 py-2 text-sm font-medium text-zinc-700 hover:text-zinc-900 md:block">
+            Sign in
+          </button>
+          <button type="button" (click)="login()" class="inline-flex items-center rounded-md bg-brand-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-brand-700">
+            Get started
+          </button>
+        }
         <button
           type="button"
           class="ml-1 inline-flex h-9 w-9 items-center justify-center rounded-md text-zinc-700 hover:bg-zinc-100 md:hidden"
@@ -45,7 +51,11 @@
           <li><a class="block rounded-md px-3 py-2 text-zinc-700 hover:bg-zinc-100" href="#features" (click)="closeMobileMenu()">Platform</a></li>
           <li><a class="block rounded-md px-3 py-2 text-zinc-700 hover:bg-zinc-100" href="#live" (click)="closeMobileMenu()">Live</a></li>
           <li><a class="block rounded-md px-3 py-2 text-zinc-700 hover:bg-zinc-100" href="#cta" (click)="closeMobileMenu()">Federations</a></li>
-          <li><a class="block rounded-md px-3 py-2 text-zinc-700 hover:bg-zinc-100" routerLink="/dashboard" (click)="closeMobileMenu()">Sign in</a></li>
+          @if (isAuthenticated()) {
+            <li><a class="block rounded-md px-3 py-2 text-zinc-700 hover:bg-zinc-100" routerLink="/dashboard" (click)="closeMobileMenu()">Open dashboard</a></li>
+          } @else {
+            <li><button type="button" class="w-full rounded-md px-3 py-2 text-left text-zinc-700 hover:bg-zinc-100" (click)="closeMobileMenu(); login()">Sign in</button></li>
+          }
         </ul>
       </nav>
     }

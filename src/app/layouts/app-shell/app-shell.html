@@ -94,10 +94,20 @@
         <div class="flex items-center gap-2 rounded-md border border-zinc-200 bg-white py-1 pl-1.5 pr-3">
           <span class="grid h-7 w-7 place-items-center rounded-md bg-brand-600 text-xs font-bold text-white">{{ initials() }}</span>
           <div class="hidden text-xs leading-tight sm:block">
-            <p class="font-medium text-zinc-900">{{ currentMember().fullName }}</p>
-            <p class="capitalize text-zinc-500">{{ currentMember().roles[0] }}</p>
+            <p class="font-medium text-zinc-900">{{ user()?.fullName ?? '…' }}</p>
+            <p class="text-zinc-500">{{ user()?.email ?? '' }}</p>
           </div>
         </div>
+        <button
+          type="button"
+          (click)="logout()"
+          class="inline-flex h-9 w-9 items-center justify-center rounded-md text-zinc-600 hover:bg-zinc-100"
+          aria-label="Sign out">
+          <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M3 4.25A2.25 2.25 0 0 1 5.25 2h5.5a.75.75 0 0 1 0 1.5h-5.5a.75.75 0 0 0-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 0 1 0 1.5h-5.5A2.25 2.25 0 0 1 3 15.75V4.25Z" clip-rule="evenodd" />
+            <path d="M14.78 6.97a.75.75 0 0 0-1.06 1.06l1.22 1.22h-7.69a.75.75 0 0 0 0 1.5h7.69l-1.22 1.22a.75.75 0 1 0 1.06 1.06l2.5-2.5a.75.75 0 0 0 0-1.06l-2.5-2.5Z" />
+          </svg>
+        </button>
       </div>
     </header>
 

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { MockDataService } from '../../core/services/mock-data.service';
+import { AuthService } from '../../core/services/auth.service';
 
 interface SidebarItem {
   readonly label: string;
@@ -21,17 +21,21 @@ const PLACEHOLDER_NAV: ReadonlyArray<SidebarItem> = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppShell {
-  private readonly mock = inject(MockDataService);
+  private readonly auth = inject(AuthService);
 
   protected readonly sidebarCollapsed = signal(false);
-  protected readonly currentMember = this.mock.currentMember;
+  protected readonly user = this.auth.user;
   protected readonly placeholderNav = PLACEHOLDER_NAV;
   protected readonly initials = computed(() => {
-    const [first, last] = this.currentMember().fullName.split(' ');
-    return ((first?.[0] ?? '') + (last?.[0] ?? '')).toUpperCase();
+    const [first = '', last = ''] = (this.user()?.fullName ?? '').split(' ');
+    return ((first[0] ?? '') + (last[0] ?? '')).toUpperCase() || '?';
   });
 
   protected toggleSidebar() {
     this.sidebarCollapsed.update((v) => !v);
+  }
+
+  protected logout() {
+    this.auth.logout();
   }
 }
